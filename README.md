@@ -7,4 +7,9 @@ sdlc certificate screenshot
 .
 .
 GIT SKILLUP CERTIFICATE 
+screenshot--
+<img width="1895" height="928" alt="Screenshot 2025-07-25 140249" src="https://github.com/user-attachments/assets/247c318c-42ef-4033-b401-3be80c53f5d6" />
+
+certificate pdf
 [gitSkillUp_certificate.pdf](https://github.com/user-attachments/files/21416682/gitSkillUp_certificate.pdf)
+
