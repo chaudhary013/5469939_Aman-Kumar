@@ -22,4 +22,9 @@ Linux screenshot
 <img width="1911" height="1003" alt="Linux_screenshot" src="https://github.com/chaudhary013/5469939_Aman-Kumar/blob/master/Linuxx/s2.png" />
 
 
+C-CERTIFICATE
+<img width="1911" height="1003" alt="C-basics" src="https://github.com/chaudhary013/5469939_Aman-Kumar/blob/master/C_Language/Introduction%20to%20C.jpg" />
+<img width="1911" height="1003" alt="C-intermediate" src="https://github.com/chaudhary013/5469939_Aman-Kumar/blob/master/C_Language/C%20Intermediate.jpg" />
+
+
 
