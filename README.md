@@ -14,4 +14,12 @@ certificate pdf
 [gitSkillUp_certificate.pdf](https://github.com/user-attachments/files/21416682/gitSkillUp_certificate.pdf)
 https://github.com/chaudhary013/5469939\_Aman-Kumar/blob/master/README.md
  b571468 (readme commit)
+.
+.
+
+Linux screenshot
+<img width="1911" height="1003" alt="Linux_screenshot" src="https://github.com/chaudhary013/5469939_Aman-Kumar/blob/master/Linuxx/s1.png" />
+<img width="1911" height="1003" alt="Linux_screenshot" src="https://github.com/chaudhary013/5469939_Aman-Kumar/blob/master/Linuxx/s2.png" />
+
+
 
