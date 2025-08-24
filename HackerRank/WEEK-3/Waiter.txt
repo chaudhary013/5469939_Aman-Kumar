@@ -1,0 +1,115 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'waiter' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER_ARRAY number
+     *  2. INTEGER q
+     */
+
+
+
+
+
+    public static List<Integer> waiter(List<Integer> number, int q) {
+    // Write your code here
+  List<Integer> result = new ArrayList<>();
+        Stack<Integer> A = new Stack<>();
+        Stack<Integer> B = new Stack<>();
+
+        // Push in given order so the last element becomes the top of A
+        for (int x : number) A.push(x);
+
+        List<Integer> primes = generatePrimes(q);
+
+        for (int i = 0; i < q; i++) {
+            int prime = primes.get(i);
+            Stack<Integer> nextA = new Stack<>();
+
+            while (!A.isEmpty()) {
+                int plate = A.pop();
+                if (plate % prime == 0) B.push(plate);
+                else nextA.push(plate);
+            }
+
+            while (!B.isEmpty()) result.add(B.pop());
+            A = nextA;
+        }
+
+        while (!A.isEmpty()) result.add(A.pop());
+        return result;
+    }
+
+    private static List<Integer> generatePrimes(int q) {
+        List<Integer> primes = new ArrayList<>();
+        int num = 2;
+        while (primes.size() < q) {
+            if (isPrime(num)) primes.add(num);
+            num++;
+        }
+        return primes;
+    }
+
+    private static boolean isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i * i <= n; i++) if (n % i == 0) return false;
+        return true;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int n = Integer.parseInt(firstMultipleInput[0]);
+
+        int q = Integer.parseInt(firstMultipleInput[1]);
+
+        String[] numberTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> number = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int numberItem = Integer.parseInt(numberTemp[i]);
+            number.add(numberItem);
+        }
+
+        List<Integer> result = Result.waiter(number, q);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(String.valueOf(result.get(i)));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}

@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            int Q = Integer.parseInt(br.readLine().trim());
+
+            StringBuilder text = new StringBuilder();
+            Stack<String> history = new Stack<>();  
+
+            for (int i = 0; i < Q; i++) {
+                String[] parts = br.readLine().split(" ");
+                int type = Integer.parseInt(parts[0]);
+
+                switch (type) {
+                    case 1: 
+                        history.push(text.toString()); 
+                        text.append(parts[1]);
+                        break;
+
+                    case 2: 
+                        history.push(text.toString()); 
+                        int k = Integer.parseInt(parts[1]);
+                        text.delete(text.length() - k, text.length());
+                        break;
+
+                    case 3: 
+                        int pos = Integer.parseInt(parts[1]);
+                        System.out.println(text.charAt(pos - 1));
+                        break;
+
+                    case 4: 
+                        if(!history.isEmpty()){
+                            text = new StringBuilder(history.pop());
+                        }
+                        break;
+                }
+            }
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+        }
+        
+    }
+}

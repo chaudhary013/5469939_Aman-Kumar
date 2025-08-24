@@ -1,0 +1,91 @@
+import java.util.*;
+
+public class Solution {
+
+
+
+
+
+
+    public static List<String> bomberMan(int n, List<String> grid) {
+        int rows = grid.size();
+        int cols = grid.get(0).length();
+
+        // If n=1, return the original grid
+        if (n == 1) {
+            return grid;
+        }
+
+        // If n is even, grid is full of bombs
+        if (n % 2 == 0) {
+            List<String> fullGrid = new ArrayList<>();
+            for (int i = 0; i < rows; i++) {
+                fullGrid.add(String.join("", Collections.nCopies(cols, "O")));
+            }
+            return fullGrid;
+        }
+
+        // Compute patterns for n%4 == 3 and n%4 == 1
+        List<String> firstDetonation = detonate(grid, rows, cols);
+        List<String> secondDetonation = detonate(firstDetonation, rows, cols);
+
+        if (n % 4 == 3) {
+            return firstDetonation;
+        } else {
+            return secondDetonation;
+        }
+    }
+
+    private static List<String> detonate(List<String> grid, int rows, int cols) {
+        char[][] result = new char[rows][cols];
+
+        // Fill with bombs initially
+        for (int i = 0; i < rows; i++) {
+            Arrays.fill(result[i], 'O');
+        }
+
+        // Detonate bombs
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (grid.get(r).charAt(c) == 'O') {
+                    result[r][c] = '.';
+                    if (r > 0) result[r - 1][c] = '.';
+                    if (r < rows - 1) result[r + 1][c] = '.';
+                    if (c > 0) result[r][c - 1] = '.';
+                    if (c < cols - 1) result[r][c + 1] = '.';
+                }
+            }
+        }
+
+        // Convert to List<String>
+        List<String> nextGrid = new ArrayList<>();
+        for (int i = 0; i < rows; i++) {
+            nextGrid.add(new String(result[i]));
+        }
+        return nextGrid;
+    }
+
+
+
+
+
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int r = sc.nextInt();
+        int c = sc.nextInt();
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        List<String> grid = new ArrayList<>();
+        for (int i = 0; i < r; i++) {
+            grid.add(sc.nextLine());
+        }
+
+        List<String> result = bomberMan(n, grid);
+        for (String row : result) {
+            System.out.println(row);
+        }
+    }
+}

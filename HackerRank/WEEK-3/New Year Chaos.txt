@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+
+
+
+    // Function to calculate minimum bribes
+    static void minimumBribes(int[] q) {
+        int bribes = 0;
+        
+        for(int i=0;i<q.length;i++){
+            if(q[i] - (i+1)>2){
+                System.out.println("Too chaotic");
+                return ;
+            }
+            for(int j = Math.max(0,q[i]-2); j<i;j++){
+                if(q[j]>q[i]){
+                    bribes++;
+                }
+            }
+        }
+        System.out.println(bribes);
+    }
+
+
+
+
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine().trim());  // test cases
+
+        while (t-- > 0) {
+            int n = Integer.parseInt(br.readLine().trim());
+            int[] q = Arrays.stream(br.readLine().split(" "))
+                            .mapToInt(Integer::parseInt)
+                            .toArray();
+
+            minimumBribes(q);
+        }
+    }
+}
