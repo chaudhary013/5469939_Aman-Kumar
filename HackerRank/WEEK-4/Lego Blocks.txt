@@ -1,0 +1,99 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'legoBlocks' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER m
+     */
+
+
+
+    static final int MOD = 1000000007;
+
+    public static int legoBlocks(int n, int m) {
+        long[] row = new long[m + 1];
+        row[0] = 1;
+        for (int i = 1; i <= m; i++) {
+            for (int b = 1; b <= 4; b++) {
+                if (i - b >= 0) {
+                    row[i] = (row[i] + row[i - b]) % MOD;
+                }
+            }
+        }
+
+        
+        long[] total = new long[m + 1];
+        for (int i = 1; i <= m; i++) {
+            total[i] = modPow(row[i], n, MOD);
+        }
+
+        
+        long[] valid = new long[m + 1];
+        valid[0] = 1;
+        for (int i = 1; i <= m; i++) {
+            long val = total[i];
+            for (int k = 1; k < i; k++) {
+                val = (val - (valid[k] * total[i - k]) % MOD + MOD) % MOD;
+            }
+            valid[i] = val;
+        }
+
+        return (int) valid[m];
+    }
+
+    
+    private static long modPow(long base, int exp, int mod) {
+        long result = 1;
+        base %= mod;
+        while (exp > 0) {
+            if ((exp & 1) == 1) {
+                result = (result * base) % mod;
+            }
+            base = (base * base) % mod;
+            exp >>= 1;
+        }
+        return result;
+    }
+}
+
+
+
+
+
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int t = Integer.parseInt(bufferedReader.readLine().trim());
+
+        for (int tItr = 0; tItr < t; tItr++) {
+            String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+            int n = Integer.parseInt(firstMultipleInput[0]);
+
+            int m = Integer.parseInt(firstMultipleInput[1]);
+
+            int result = Result.legoBlocks(n, m);
+
+            bufferedWriter.write(String.valueOf(result));
+            bufferedWriter.newLine();
+        }
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
